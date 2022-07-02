@@ -17,7 +17,7 @@ export class LoggingInterceptor implements NestInterceptor {
           const duration = Date.now() - requestTime;
           Logger.log(
             `${method} ${endpoint} ${duration.toLocaleString('en-US')}ms`,
-            context.getHandler().name,
+            context.getClass().name,
           );
         }),
       );

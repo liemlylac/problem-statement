@@ -1,21 +1,21 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/problem-statement/src",
+  "sourceRoot": "apps/main/src",
   "monorepo": true,
-  "root": "apps/problem-statement",
+  "root": "apps/main",
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "apps/problem-statement/tsconfig.app.json"
+    "tsConfigPath": "apps/main/tsconfig.app.json"
   },
   "projects": {
-    "problem-statement": {
+    "main": {
       "type": "application",
-      "root": "apps/problem-statement",
+      "root": "apps/main",
       "entryFile": "main",
-      "sourceRoot": "apps/problem-statement/src",
+      "sourceRoot": "apps/main/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/problem-statement/tsconfig.app.json"
+        "tsConfigPath": "apps/main/tsconfig.app.json"
       }
     },
     "queue": {
@@ -25,6 +25,15 @@
       "sourceRoot": "apps/queue/src",
       "compilerOptions": {
         "tsConfigPath": "apps/queue/tsconfig.app.json"
+      }
+    },
+    "core": {
+      "type": "library",
+      "root": "libs/core",
+      "entryFile": "index",
+      "sourceRoot": "libs/core/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/core/tsconfig.lib.json"
       }
     }
   }
