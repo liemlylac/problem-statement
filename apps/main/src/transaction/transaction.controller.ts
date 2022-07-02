@@ -9,13 +9,13 @@ export class TransactionController {
   @Post('import')
   import(@Body() data: any) {
     const input = [];
-    for (let i = 0; i < data.size; i++) {
+    for (let i = 0; i < data.total; i++) {
       const record: any = { content: data.content, datetime: new Date() };
       record.amount = (Math.random() * 2 - 1) * (Math.random() * 1000) * 1500;
-      record.type = record.amount > 0 ? 'Deposit'  : 'Withdraw' ;
+      record.type = record.amount > 0 ? 1 : -1 ;
       input.push(record);
     }
     console.log(`Input ${input.length} items`);
-    return this.transactionService.import(input);
+    return this.transactionService.import(input, data.size);
   }
 }

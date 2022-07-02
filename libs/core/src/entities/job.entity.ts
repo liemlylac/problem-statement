@@ -1,8 +1,17 @@
-import { Column, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  JoinColumn,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Execution } from './execution.entity';
 
 @Entity('job')
-export class Job {
+export class Job extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -20,6 +29,12 @@ export class Job {
 
   @Column({ name: 'metadata', type: 'json', nullable: true })
   metadata: string;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
   @ManyToOne(() => Execution, (execution) => execution.jobs)
   @JoinColumn({ name: 'execution_id' })

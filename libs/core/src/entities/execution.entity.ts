@@ -1,8 +1,16 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Job } from './job.entity';
 
 @Entity('execution')
-export class Execution {
+export class Execution extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,6 +31,12 @@ export class Execution {
 
   @Column({ name: 'job_success', type: 'int', nullable: true })
   jobSuccess: number;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
   @OneToMany(() => Job, (job) => job.execution)
   jobs: Job[];

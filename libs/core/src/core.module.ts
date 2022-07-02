@@ -1,3 +1,5 @@
+import { ExecuteService } from '@app/core/services/execute.service';
+import { JobSubscriber } from '@app/core/subscribers/job.subscriber';
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +9,7 @@ import { CoreService } from './core.service';
 import { Execution } from './entities/execution.entity';
 import { Job } from './entities/job.entity';
 import { Transaction } from './entities/transaction.entity';
+import { join } from 'path';
 
 @Global()
 @Module({
@@ -32,8 +35,9 @@ import { Transaction } from './entities/transaction.entity';
           username: config.username,
           password: config.password,
           database: config.database,
-          entities: ['dist/**/*.entity.{ts,js}'],
-          synchronize: true,
+          entities: [join(__dirname, '**','*.entity.{ts,js}')],
+          subscribers: [join(__dirname, '**', '*.subscriber.{ts,js}')],
+          synchronize: config.synchronize,
           logging: config.logging,
           charset: config.charset,
           timezone: config.timezone,
@@ -42,8 +46,8 @@ import { Transaction } from './entities/transaction.entity';
     }),
     TypeOrmModule.forFeature([Execution, Job, Transaction]),
   ],
-  providers: [CoreService],
-  exports: [TypeOrmModule, CoreService],
+  providers: [CoreService, ExecuteService, JobSubscriber],
+  exports: [TypeOrmModule, CoreService, ExecuteService],
 })
 export class CoreModule {
 }

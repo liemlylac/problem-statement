@@ -11,4 +11,8 @@ export const coreConfigSchema = {
   DB_USERNAME: Joi.string().required(),
   DB_PASSWORD: Joi.string().required(),
   DB_DATABASE: Joi.string().required(),
+  DB_SYNC: Joi.boolean().default(false),
+  DB_TIMEZONE:Joi.string().default('Z'),
+  DB_LOGGING: Joi.boolean().default(false),
+  DB_CHARSET: Joi.string().default('utf8'),
 }
