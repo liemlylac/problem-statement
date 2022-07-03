@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import * as Joi from 'joi';
 import { HttpExceptionFilter, LoggingInterceptor } from './common';
+import { ExecutionModule } from './execution/execution.module';
 import { mainConfigSchema } from './main-config.schema';
 import { QueueModule } from './queue/queue.module';
 import { TransactionModule } from './transaction/transaction.module';
@@ -22,6 +23,7 @@ import { TransactionModule } from './transaction/transaction.module';
     CoreModule,
     QueueModule,
     TransactionModule,
+    ExecutionModule,
   ],
   providers: [
     {

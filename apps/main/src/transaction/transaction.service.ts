@@ -36,7 +36,9 @@ export class TransactionService implements ImportInterface {
           }
         );
       }
-      return 'Ok';
+      return {
+        executionId: execution.id,
+      };
     } catch (e) {
       this.logger.error(e);
       throw e;

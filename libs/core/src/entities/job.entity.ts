@@ -28,7 +28,7 @@ export class Job extends BaseEntity {
   endDate: Date;
 
   @Column({ name: 'metadata', type: 'json', nullable: true })
-  metadata: string;
+  metadata: any;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -37,6 +37,6 @@ export class Job extends BaseEntity {
   updatedAt: Date;
 
   @ManyToOne(() => Execution, (execution) => execution.jobs)
-  @JoinColumn({ name: 'execution_id' })
+  @JoinColumn({ name: 'execution_id', referencedColumnName: 'id' })
   execution: Execution;
 }

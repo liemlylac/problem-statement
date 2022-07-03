@@ -1,11 +1,11 @@
+import { CoreModule } from '@app/core';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import * as Joi from 'joi';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { queueConfigSchema } from './queue-config.schema';
-import { TransactionModule } from './transaction/transaction.module';
+import * as Joi from 'joi';
 import { LoggingInterceptor } from './common/logging.interceptor';
-import { CoreModule } from '@app/core';
+import { ImportModule } from './import/import.module';
+import { queueConfigSchema } from './queue-config.schema';
 
 @Module({
   imports: [
@@ -19,13 +19,14 @@ import { CoreModule } from '@app/core';
       },
     }),
     CoreModule,
-    TransactionModule,
+    ImportModule,
   ],
   providers: [
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
-    }
+    },
   ],
 })
-export class AppModule {}
+export class AppModule {
+}

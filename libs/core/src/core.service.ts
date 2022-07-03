@@ -4,11 +4,7 @@ import { isTruthy } from './helper';
 
 @Injectable()
 export class CoreService {
-  constructor(
-    private readonly config: ConfigService,
-  ) {
-    console.log(`CoreService constructor`)
-  }
+  constructor(private readonly config: ConfigService) {}
 
   getQueueConfig () {
     return {

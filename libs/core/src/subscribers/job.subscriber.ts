@@ -1,5 +1,7 @@
 import { Execution } from '@app/core/entities/execution.entity';
+import { JobStatus } from '@app/core/job.enum';
 import { Logger } from '@nestjs/common';
+import { InjectDataSource } from '@nestjs/typeorm';
 import {
   DataSource,
   EntityManager,
@@ -12,9 +14,14 @@ import { Job } from '../entities/job.entity';
 
 @EventSubscriber()
 export class JobSubscriber implements EntitySubscriberInterface<Job> {
+  constructor(
+    @InjectDataSource()
+    dataSource: DataSource,
+    ) {
+    if (dataSource?.subscribers) {
+      dataSource.subscribers.push(this);
 
-  constructor(dataSource: DataSource) {
-    dataSource.subscribers.push(this);
+    }
   }
 
   listenTo() {
@@ -32,7 +39,7 @@ export class JobSubscriber implements EntitySubscriberInterface<Job> {
   protected async countSuccessJob(manager: EntityManager, executionId: string) {
     const { count } = await manager.createQueryBuilder(Job, 'job')
       .select('COUNT(job.id)', 'count')
-      .where({ executionId: executionId, status: 'done' })
+      .where({ executionId: executionId, status: JobStatus.Success })
       .getRawOne();
     return count;
   }
