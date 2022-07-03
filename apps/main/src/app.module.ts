@@ -1,10 +1,11 @@
 import { CoreModule } from '@app/core';
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import * as Joi from 'joi';
-import { HttpExceptionFilter, LoggingInterceptor } from './common';
+import { appProviders } from './app.providers';
 import { ExecutionModule } from './execution/execution.module';
+import { KeycloakModule } from './keycloak/keycloak.module';
 import { mainConfigSchema } from './main-config.schema';
 import { QueueModule } from './queue/queue.module';
 import { TransactionModule } from './transaction/transaction.module';
@@ -20,20 +21,15 @@ import { TransactionModule } from './transaction/transaction.module';
         abortEarly: true,
       }
     }),
+    HttpModule,
     CoreModule,
     QueueModule,
+    KeycloakModule,
     TransactionModule,
     ExecutionModule,
   ],
   providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
-    },
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
-    },
+    ...appProviders,
   ],
 })
 export class AppModule {

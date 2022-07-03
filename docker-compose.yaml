@@ -14,7 +14,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql_db
-    command: --authentication-policy=mysql_native_password
+    command: --init-file /tmp/mysql-data/init.sql
     ports:
       - '33061:3306'
     environment:
@@ -23,7 +23,29 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: adminSecret
     volumes:
+      - ./init.sql:/tmp/mysql-data/init.sql
       - mysql_data:/var/lib/mysql
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:legacy
+    container_name: keycloak_service
+    #command: start-dev --http-port 8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: secret
+      KEYCLOAK_IMPORT: /tmp/problem-statement.json
+      DB_VENDOR: mysql
+      DB_ADDR: mysql
+      DB_USER: root
+      DB_PASSWORD: secret
+      DB_DATABASE: keycloak
+    volumes:
+      - ./realm-problem-statement-export.json:/tmp/problem-statement.json
+
 volumes:
   mysql_data:
     name: ps_mysql_data

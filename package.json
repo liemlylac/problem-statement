@@ -29,6 +29,7 @@
     "test:e2e": "jest --config ./apps/problem-statement/test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/axios": "0.0.8",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.1.0",
     "@nestjs/core": "^8.0.0",
@@ -38,7 +39,9 @@
     "amqp-connection-manager": "^4.1.3",
     "amqplib": "^0.10.0",
     "joi": "^17.6.0",
+    "keycloak-connect": "^18.0.2",
     "mysql2": "^2.3.3",
+    "nest-keycloak-connect": "^1.8.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
