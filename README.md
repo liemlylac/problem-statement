@@ -1,19 +1,16 @@
-# Problem statement
+<div align="center">
+  <h1>Problem statement</h1>
+</div>
 
-[![Mit License](https://img.shields.io/github/license/liemlylac/problem-statement)](https://github.com/liemlylac/problem-statement/blob/main/LICENSE)
+<p align="center">
+<a href="https://snyk.io/test/github/liemlylac/problem-statement" target="_blank"><img src="https://snyk.io/test/github/liemlylac/problem-statement/badge.svg" alt="Snyk"></a>
+<a href="https://codeclimate.com/github/liemlylac/problem-statement/test_coverage" target="_blank"><img src="https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/test_coverage" alt="Test Coverage"/></a>
+  <a href="https://codeclimate.com/github/liemlylac/problem-statement/maintainability" target="_blank"><img src="https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/maintainability" alt="CodeClimate Maintainability"></a>
+  <a href="https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement" target="_blank"><img src="https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=reliability_rating" alt="Reliability Rating"></a>
+   <a href="https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement" target="_blank"><img src="https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=security_rating" alt="Security Rating"></a>
+  <a href="https://github.com/liemlylac/problem-statement/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/liemlylac/problem-statement" alt="Mit License"></a>
+ </p>
 
-Snyk: 
-[![Known Vulnerabilities](https://snyk.io/test/github/liemlylac/problem-statement/badge.svg)](https://snyk.io/test/github/liemlylac/problem-statement)
-
-SonarQube:
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
-
-Badges From CodeClimate:
-[![Maintainability](https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/maintainability)](https://codeclimate.com/github/liemlylac/problem-statement/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/test_coverage)](https://codeclimate.com/github/liemlylac/problem-statement/test_coverage)
 
 ## Description
 Problem statement using NestJs framework.
