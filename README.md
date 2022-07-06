@@ -1,8 +1,20 @@
 # Problem statement
+
+[![Mit License](https://img.shields.io/github/license/liemlylac/problem-statement)](https://github.com/liemlylac/problem-statement/blob/main/LICENSE)
+
+
+Badges From SonarQube:
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
+
+Badges From CodeClimate
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/liemlylac/problem-statement)
+![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/liemlylac/problem-statement)
+![Code Climate coverage](https://img.shields.io/codeclimate/coverage/liemlylac/problem-statement)
+![Code Climate issues](https://img.shields.io/codeclimate/issues/liemlylac/problem-statement)
+
 ## Description
 Problem statement using NestJs framework.
 
