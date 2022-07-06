@@ -10,10 +10,8 @@ Badges From SonarQube:
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 
 Badges From CodeClimate
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/liemlylac/problem-statement)
-![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/liemlylac/problem-statement)
-![Code Climate coverage](https://img.shields.io/codeclimate/coverage/liemlylac/problem-statement)
-![Code Climate issues](https://img.shields.io/codeclimate/issues/liemlylac/problem-statement)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/maintainability)](https://codeclimate.com/github/liemlylac/problem-statement/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/test_coverage)](https://codeclimate.com/github/liemlylac/problem-statement/test_coverage)
 
 ## Description
 Problem statement using NestJs framework.
