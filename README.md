@@ -1,10 +1,7 @@
 # Problem statement
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=bugs)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement)
 ## Description
 Problem statement using NestJs framework.
