@@ -4,6 +4,12 @@ import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
+  /**
+   * Interceptor for logging request and response. For Http only
+   *
+   * @param context
+   * @param next
+   */
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const requestTime = Date.now();
     const request = context.switchToHttp().getRequest();

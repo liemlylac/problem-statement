@@ -1,13 +1,9 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-
-interface KeycloakConfig {
-  serverUrl: string;
-  realName: string;
-  clientId: string;
-  clientSecret: string;
-}
+import { AxiosResponse } from 'axios';
+import { firstValueFrom } from 'rxjs';
+import { KeycloakConfig, KeycloakLoginOptions, KeycloakLoginResult } from './keycloak.interface';
 
 @Injectable()
 export class KeycloakService {
@@ -16,27 +12,35 @@ export class KeycloakService {
    private readonly config: ConfigService,
     private readonly http: HttpService,
   ) {
-    this.keycloakConfig = this.getKeycloakConfig();
-  }
-
-  protected getKeycloakConfig(): KeycloakConfig {
-    return {
+    this.keycloakConfig = {
       serverUrl: this.config.get('KEYCLOAK_SERVER_URL'),
       realName: this.config.get('KEYCLOAK_REALM_NAME'),
       clientId: this.config.get('KEYCLOAK_CLIENT_ID'),
       clientSecret: this.config.get('KEYCLOAK_CLIENT_SECRET'),
-    }
-  }
-
-  protected getHttpConfig() {
-    return {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
     };
   }
 
-  login(login: { username: string, password: string}) {
+  /**
+   * Generate http request config with default value
+   *
+   * @param optional Overriding value
+   * @protected
+   */
+  protected getHttpConfig(optional?: object) {
+    return {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      ...optional,
+    };
+  }
+
+  /**
+   * Keycloak Login Service
+   *
+   * @param login Login options for Keycloak
+   */
+  login(login: KeycloakLoginOptions): Promise<AxiosResponse<KeycloakLoginResult>> {
     const url = `${this.keycloakConfig.serverUrl}/auth/realms/${this.keycloakConfig.realName}/protocol/openid-connect/token`;
     const data = new URLSearchParams({
       client_id: this.keycloakConfig.clientId,
@@ -45,6 +49,6 @@ export class KeycloakService {
       password: login.password,
       grant_type: 'password',
     }).toString();
-    return this.http.post(url, data, this.getHttpConfig()).toPromise();
+    return firstValueFrom(this.http.post(url, data, this.getHttpConfig()));
   }
 }

@@ -2,10 +2,17 @@
   "name": "problem-statement",
   "version": "0.0.1",
   "description": "Problem statement using NestJs with RabbitMQ",
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liemlylac/problem-statement/"
+  },
   "author": "liemlylac",
-  "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
+    "doc": "compodoc -p apps/main/tsconfig.app.json -d docs/apps/main",
+    "doc:queue": "compodoc -p apps/queue/tsconfig.app.json -d docs/apps/queue",
+    "doc:libs": "compodoc -p libs/core/tsconfig.app.json -d docs/libs/core",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\"",
@@ -35,9 +42,12 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/microservices": "^8.4.7",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.1.4",
     "amqp-connection-manager": "^4.1.3",
     "amqplib": "^0.10.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "joi": "^17.6.0",
     "keycloak-connect": "^18.0.2",
     "mysql2": "^2.3.3",
@@ -45,9 +55,11 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "swagger-ui-express": "^4.4.0",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.19",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
@@ -81,10 +93,25 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "verbose": true,
+    "collectCoverage": false,
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "<rootDir>/apps/**/*.(t|j)s",
+      "<rootDir>/libs/**/*.(t|j)s",
+      "!<rootDir>/dist/**/*.(t|j)s",
+      "!<rootDir>/**/*.(spec|test|interface|module|mock).(ts|js)"
     ],
-    "coverageDirectory": "./coverage",
+    "coverageDirectory": "<rootDir>/coverage",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "package.json",
+      "package-lock.json"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "clover",
+      "text-summary"
+    ],
     "testEnvironment": "node",
     "roots": [
       "<rootDir>/apps/",

@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { appProviders } from './app.providers';
+import { AuthModule } from './auth/auth.module';
 import { ExecutionModule } from './execution/execution.module';
 import { KeycloakModule } from './keycloak/keycloak.module';
 import { mainConfigSchema } from './main-config.schema';
@@ -25,6 +26,7 @@ import { TransactionModule } from './transaction/transaction.module';
     CoreModule,
     QueueModule,
     KeycloakModule,
+    AuthModule,
     TransactionModule,
     ExecutionModule,
   ],

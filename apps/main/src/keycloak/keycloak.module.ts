@@ -3,7 +3,6 @@ import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { KeycloakConnectModule } from 'nest-keycloak-connect';
 import { KeycloakConfigService } from './keycloak.config.service';
-import { KeycloakController } from './keycloak.controller';
 import { KeycloakService } from './keycloak.service';
 
 @Global()
@@ -15,7 +14,6 @@ import { KeycloakService } from './keycloak.service';
       useClass: KeycloakConfigService,
     }),
   ],
-  controllers: [KeycloakController],
   providers: [KeycloakConfigService, KeycloakService],
   exports: [KeycloakConnectModule, KeycloakService],
 })

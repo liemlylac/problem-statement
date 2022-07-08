@@ -13,6 +13,12 @@ export class TransactionService implements ImportInterface {
   ) {
   }
 
+  /**
+   * Import transaction, split input into small pieces and send to queue
+   *
+   * @param input
+   * @param maxItemPerQueue
+   */
   async import(input: any[], maxItemPerQueue: number) {
     const listItem = input.slice(0); // deep clone to new array
     try {
@@ -22,7 +28,7 @@ export class TransactionService implements ImportInterface {
       while(listItem.length > 0) {
         const queueItems = listItem.splice(0, maxItemPerQueue);
         const job = await this.executionService.createJob(execution.id, { totalItems: queueItems.length });
-        this.logger.log(`Sending with data: ${JSON.stringify({
+        this.logger.log(`Send to queue: ${JSON.stringify({
           executionId: execution.id,
           jobId: job.id,
           items: queueItems.length,

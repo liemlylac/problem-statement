@@ -1,11 +1,17 @@
 import { Body, Controller, Post } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'nest-keycloak-connect';
+import { Role } from '../auth/auth.options';
 import { TransactionService } from './transaction.service';
 
+@ApiTags('Transaction')
+@ApiBearerAuth()
 @Controller('transaction')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {
   }
 
+  @Roles({ roles: [ Role.Admin, Role.User ]})
   @Post('import')
   import(@Body() data: any) {
     const input = [];
@@ -15,7 +21,6 @@ export class TransactionController {
       record.type = record.amount > 0 ? 1 : -1 ;
       input.push(record);
     }
-    console.log(`Input ${input.length} items`);
     return this.transactionService.import(input, data.size);
   }
 }
