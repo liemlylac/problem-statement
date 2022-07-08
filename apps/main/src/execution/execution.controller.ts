@@ -1,8 +1,8 @@
 import { Execution } from '@app/core/entities/execution.entity';
 import { ExecuteService } from '@app/core/services/execute.service';
 import { BadRequestException, Controller, Get, Param } from '@nestjs/common';
-import { isUUID } from '@nestjs/common/utils/is-uuid';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { isUUID } from 'class-validator';
 import { Roles } from 'nest-keycloak-connect';
 import { Role } from '../auth/auth.options';
 import { ExecutionDescribeDto } from './dto/execution-describe.dto';
