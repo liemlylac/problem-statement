@@ -1,5 +1,5 @@
 import { ArgumentsHost, BadRequestException, Catch, ExceptionFilter, HttpException, Logger } from '@nestjs/common';
-import { Response, Request } from 'express';
+import { Request, Response } from 'express';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -17,7 +17,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     if (exception instanceof BadRequestException) {
       const responseInside: any = exception.getResponse();
-      exception.message = responseInside.message.join(', ');
+      exception.message = responseInside.message instanceof Array ?
+        responseInside.message.join(', ')
+        : responseInside.message;
     }
 
     const responseBody = {

@@ -1,6 +1,6 @@
 import { ExecuteService } from '@app/core/services/execute.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ExecutionController } from '../execution/execution.controller';
+import { ExecutionController } from './execution.controller';
 
 jest.mock('@app/core/services/execute.service');
 

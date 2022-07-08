@@ -1,7 +1,8 @@
 import { CoreModule } from '@app/core';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MulterModule } from '@nestjs/platform-express';
 import * as Joi from 'joi';
 import { appProviders } from './app.providers';
 import { AuthModule } from './auth/auth.module';
@@ -21,6 +22,13 @@ import { TransactionModule } from './transaction/transaction.module';
         allowUnknown: true,
         abortEarly: true,
       }
+    }),
+    MulterModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        dest: configService.get('MULTER_DEST') || './upload',
+      }),
+      inject: [ConfigService],
     }),
     HttpModule,
     CoreModule,

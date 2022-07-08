@@ -3,6 +3,7 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Public } from 'nest-keycloak-connect';
 import { KeycloakService } from '../keycloak/keycloak.service';
 import { LoginRequestDTO, LoginResultDTO } from './dto/login.dto';
+import { RefreshTokenDTO, RefreshTokenResultDTO } from './dto/refresh-token.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -29,6 +30,28 @@ export class AuthController {
         expiresIn: data.expires_in,
         tokenType: data.token_type,
       }
+    } catch (e) {
+      Logger.error(e);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  @ApiOperation({
+    summary: 'Refresh token to get new access token',
+    description: 'Call this API to get new access token by using refresh token after login',
+  })
+  @ApiOkResponse({ type: RefreshTokenResultDTO })
+  @Public()
+  @Post('refresh-token')
+  async refreshToken(@Body() form: RefreshTokenDTO): Promise<RefreshTokenResultDTO> {
+    try {
+      const { data } = await this.keycloakService.refreshToken(form);
+      return {
+        accessToken: data.access_token,
+        expiresIn: data.expires_in,
+        refreshToken: data.refresh_token,
+        tokenType: data.token_type,
+      };
     } catch (e) {
       Logger.error(e);
       throw new InternalServerErrorException();

@@ -3,7 +3,12 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
-import { KeycloakConfig, KeycloakLoginOptions, KeycloakLoginResult } from './keycloak.interface';
+import {
+  KeycloakConfig,
+  KeycloakLoginOptions,
+  KeycloakLoginResult,
+  KeycloakRefreshTokenOptions, KeycloakRefreshTokenResult,
+} from './keycloak.interface';
 
 @Injectable()
 export class KeycloakService {
@@ -48,6 +53,22 @@ export class KeycloakService {
       username: login.username,
       password: login.password,
       grant_type: 'password',
+    }).toString();
+    return firstValueFrom(this.http.post(url, data, this.getHttpConfig()));
+  }
+
+  /**
+   * Keycloak refresh token internal service
+   *
+   * @param options
+   */
+  refreshToken(options: KeycloakRefreshTokenOptions): Promise<AxiosResponse<KeycloakRefreshTokenResult>> {
+    const url = `${this.keycloakConfig.serverUrl}/auth/realms/${this.keycloakConfig.realName}/protocol/openid-connect/token`;
+    const data = new URLSearchParams({
+      client_id: this.keycloakConfig.clientId,
+      client_secret: this.keycloakConfig.clientSecret,
+      refresh_token: options.refreshToken,
+      grant_type: 'refresh_token',
     }).toString();
     return firstValueFrom(this.http.post(url, data, this.getHttpConfig()));
   }
