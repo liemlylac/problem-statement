@@ -4,7 +4,6 @@ import { JobStatus } from '@app/core/job.enum';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, In, Not, QueryFailedError, Repository } from 'typeorm';
-import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 
 @Injectable()
 export class ExecuteService {
@@ -24,20 +23,16 @@ export class ExecuteService {
   }
 
   getById(executionId, options: { loadJobs: boolean}) {
-    const findOptions: FindOneOptions<Execution> = {
-      where: {
-        id: executionId,
-      }
-    };
+    const query = this.executeRepo.createQueryBuilder('execution')
+      .select(['execution.id', 'execution.metadata', 'execution.createdAt', 'execution.updatedAt'])
+      .where('execution.id = :executionId', { executionId });
+
     if (options.loadJobs) {
-      findOptions.relations = ['jobs'];
-      findOptions.order = {
-        jobs: {
-          createdAt: 'ASC',
-        }
-      }
+      query.leftJoin('execution.jobs', 'job')
+      .addSelect([ 'job.id', 'job.status', 'job.metadata', 'job.startDate', 'job.endDate' ])
+      .orderBy('job.createdAt', 'ASC');
     }
-    return this.executeRepo.findOne(findOptions);
+    return query.getOne();
   }
 
   createJob(executionId: string, metadata) {

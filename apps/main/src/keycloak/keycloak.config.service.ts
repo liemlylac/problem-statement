@@ -14,7 +14,7 @@ export class KeycloakConfigService implements KeycloakConnectOptionsFactory {
 
   createKeycloakConnectOptions(): KeycloakConnectOptions {
     return {
-      authServerUrl: `${this.config.get('KEYCLOAK_SERVER_URL')}/auth`, // TODO review this postfix or keep it
+      authServerUrl: `${this.config.get('KEYCLOAK_SERVER_URL')}/auth`,
       realm: this.config.get('KEYCLOAK_REALM_NAME'),
       clientId: this.config.get('KEYCLOAK_CLIENT_ID'),
       secret: this.config.get('KEYCLOAK_CLIENT_SECRET'),

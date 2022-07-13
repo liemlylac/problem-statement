@@ -4,6 +4,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 import * as Joi from 'joi';
+import { diskStorage } from 'multer';
+import { AppController } from './app.controller';
 import { appProviders } from './app.providers';
 import { AuthModule } from './auth/auth.module';
 import { ExecutionModule } from './execution/execution.module';
@@ -11,6 +13,7 @@ import { KeycloakModule } from './keycloak/keycloak.module';
 import { mainConfigSchema } from './main-config.schema';
 import { QueueModule } from './queue/queue.module';
 import { TransactionModule } from './transaction/transaction.module';
+require('./common/primitive.extends');
 
 @Module({
   imports: [
@@ -26,7 +29,10 @@ import { TransactionModule } from './transaction/transaction.module';
     MulterModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        dest: configService.get('MULTER_DEST') || './upload',
+        //dest: configService.get('MULTER_DEST') || './upload',
+        storage: diskStorage({
+          destination: configService.get('MULTER_DEST') || './upload',
+        })
       }),
       inject: [ConfigService],
     }),
@@ -38,6 +44,7 @@ import { TransactionModule } from './transaction/transaction.module';
     TransactionModule,
     ExecutionModule,
   ],
+  controllers: [AppController],
   providers: [
     ...appProviders,
   ],
