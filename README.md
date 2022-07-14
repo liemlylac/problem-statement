@@ -5,7 +5,7 @@
 
 <p align="center">
 <a href="https://snyk.io/test/github/liemlylac/problem-statement" target="_blank"><img src="https://snyk.io/test/github/liemlylac/problem-statement/badge.svg" alt="Snyk"></a>
-<a href="https://codeclimate.com/github/liemlylac/problem-statement/test_coverage" target="_blank"><img src="https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/test_coverage" alt="Test Coverage"/></a>
+<a href="https://codecov.io/gh/liemlylac/problem-statement" target="_blank"><img src="https://codecov.io/gh/liemlylac/problem-statement/branch/main/graph/badge.svg?token=4T4Z4W34XM" alt="CodeCov Test Coverage"/></a>
   <a href="https://codeclimate.com/github/liemlylac/problem-statement/maintainability" target="_blank"><img src="https://api.codeclimate.com/v1/badges/5f8a181fcb325362e232/maintainability" alt="CodeClimate Maintainability"></a>
   <a href="https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement" target="_blank"><img src="https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=reliability_rating" alt="Reliability Rating"></a>
    <a href="https://sonarcloud.io/summary/new_code?id=liemlylac_problem-statement" target="_blank"><img src="https://sonarcloud.io/api/project_badges/measure?project=liemlylac_problem-statement&metric=security_rating" alt="Security Rating"></a>
