@@ -9,7 +9,9 @@
 ## Create User
 1. Access [this link](http://localhost:8080/auth/admin/master/console/#/realms/problem-statement/users)
 or go to Manager > User at the left menu.
-2. Click add user![add-user.png](doc/add-user.png)
+2. Click add user
+
+![add-user.png](doc/add-user.png)
 3. User info:
    - Username: `user1`
    - another information if you want (optional)
@@ -36,5 +38,5 @@ or go to Manager > User at the left menu.
 ```bash
 $ curl --location --request POST 'http://localhost:3000/auth/login' \
 --header 'Content-Type: application/json' \
---data-raw '{"username": "user2","password": "123123"}'
+--data-raw '{"username": "user1","password": "123123"}'
 ```
