@@ -1,4 +1,13 @@
-import { Body, Controller, HttpCode, HttpStatus, InternalServerErrorException, Logger, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  InternalServerErrorException,
+  Logger,
+  Post,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Public } from 'nest-keycloak-connect';
 import { KeycloakService } from '../keycloak/keycloak.service';
@@ -30,8 +39,11 @@ export class AuthController {
         expiresIn: data.expires_in,
         tokenType: data.token_type,
       }
-    } catch (e) {
-      Logger.error(e);
+    } catch (error) {
+      Logger.error(error);
+      if (error.response.status === HttpStatus.UNAUTHORIZED) {
+        throw new UnauthorizedException(error.response.data)
+      }
       throw new InternalServerErrorException();
     }
   }
