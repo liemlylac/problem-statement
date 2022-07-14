@@ -33,7 +33,7 @@ import { TransactionModule } from './transaction/transaction.module';
           destination: configService.get('MULTER_DEST') || './upload',
         }),
         limits: {
-          fileSize: 10000000, // Sensitive: 10MB is more than the recommended limit of 8MB
+          fileSize: 8000000 , // limit of 8MB
         }
       }),
       inject: [ConfigService],
