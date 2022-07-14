@@ -1,3 +1,5 @@
+import { randomInt } from 'crypto';
+
 /**
  * Check input is true or false
  *
@@ -21,7 +23,7 @@ export function randomString(length: number, options?: { source: string }) {
   const characters = options.source ?? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
   for ( let i = 0; i < length; i++ ) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    result += characters.charAt(randomInt(0, charactersLength));
   }
   return result;
 }

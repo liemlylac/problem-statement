@@ -1,4 +1,6 @@
-export class ExecutionDescribeDto {
+import { IsUUID } from 'class-validator';
+
+export class ExecutionDescribeResultDTO {
   id: string;
   metadata: any;
   startedAt: Date;
@@ -8,4 +10,9 @@ export class ExecutionDescribeDto {
     success: number;
     items: any[];
   };
+}
+
+export class ExecutionDescribeDTO {
+  @IsUUID()
+  executionId: string;
 }

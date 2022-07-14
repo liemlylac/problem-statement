@@ -37,8 +37,8 @@ export class AuthController {
   }
 
   @ApiOperation({
-    summary: 'Refresh token to get new access token',
-    description: 'Call this API to get new access token by using refresh token after login',
+    summary: 'Refresh new access token',
+    description: 'Using refresh token from login api to get new access token',
   })
   @ApiOkResponse({ type: RefreshTokenResultDTO })
   @Public()

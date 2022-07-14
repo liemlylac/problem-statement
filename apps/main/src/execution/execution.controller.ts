@@ -1,11 +1,13 @@
 import { Execution } from '@app/core/entities/execution.entity';
 import { ExecuteService } from '@app/core/services/execute.service';
-import { BadRequestException, Controller, Get, Param } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { isUUID } from 'class-validator';
+import { Controller, Get, Param } from '@nestjs/common';
+import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'nest-keycloak-connect';
 import { Role } from '../auth/auth.options';
-import { ExecutionDescribeDto } from './dto/execution-describe.dto';
+import {
+  ExecutionDescribeDTO,
+  ExecutionDescribeResultDTO,
+} from './dto/execution-describe.dto';
 
 @ApiTags('Execution')
 @ApiBearerAuth()
@@ -16,8 +18,8 @@ export class ExecutionController {
   ) {
   }
 
-  protected mappingDescribeResponse(execution: Execution): ExecutionDescribeDto {
-    const dto = new ExecutionDescribeDto();
+  protected mappingDescribeResponse(execution: Execution): ExecutionDescribeResultDTO {
+    const dto = new ExecutionDescribeResultDTO();
     dto.id = execution.id;
     dto.startedAt = execution.startDate;
     dto.endedAt = execution.endDate;
@@ -34,12 +36,10 @@ export class ExecutionController {
     summary: 'Describe execution and job status',
     description: 'Show information about execution and job status'
   })
+  @ApiOkResponse({ type: ExecutionDescribeResultDTO })
   @Get('describe/:executionId')
   @Roles({ roles: [Role.Admin, Role.User] })
-  async describe(@Param('executionId') executionId: string) {
-    if (!isUUID(executionId)) {
-      throw new BadRequestException('Invalid id (UUID) format');
-    }
+  async describe(@Param() { executionId }: ExecutionDescribeDTO): Promise<ExecutionDescribeResultDTO>{
     const execution = await this.service.getById(executionId, { loadJobs: true });
     return this.mappingDescribeResponse(execution);
   }

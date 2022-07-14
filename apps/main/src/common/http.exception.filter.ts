@@ -15,7 +15,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = context.getRequest<Request>();
     const status = exception.getStatus();
 
-    if (Number(status).between(400, 500)) { // * HttpStatus 4xx
+    if (400 <= status && status < 500) { // * HttpStatus 4xx
       const responseInside: any = exception.getResponse();
       const errorMessages = responseInside.messages ?? responseInside.message
       if (errorMessages) {

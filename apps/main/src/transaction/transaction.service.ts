@@ -58,29 +58,17 @@ export class TransactionService implements ImportInterface {
   async import(input: any[], maxItemPerQueue: number) {
     const listItem = input.slice(0); // deep clone to new array
     try {
-      const execution = await this.executionService.createExecution({
-        totalItems: listItem.length,
-      });
+      const execution = await this.executionService.createExecution({ totalItems: listItem.length });
       while(listItem.length > 0) {
         const queueItems = listItem.splice(0, maxItemPerQueue);
         const job = await this.executionService.createJob(execution.id, { totalItems: queueItems.length });
-        this.logger.log(`Send to queue: ${JSON.stringify({
-          executionId: execution.id,
-          jobId: job.id,
-          items: queueItems.length,
-        })}`);
+        this.logger.log({ executionId: execution.id, jobId: job.id, items: queueItems.length });
         this.queueService.send(
           commonConfig.MessagePattern.Transaction.Import,
-          {
-            executionId: execution.id,
-            jobId: job.id,
-            items: queueItems,
-          }
+          { executionId: execution.id, jobId: job.id, items: queueItems }
         );
       }
-      return {
-        executionId: execution.id,
-      };
+      return { executionId: execution.id };
     } catch (e) {
       this.logger.error(e);
       throw e;

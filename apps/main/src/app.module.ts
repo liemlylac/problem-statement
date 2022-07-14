@@ -13,7 +13,6 @@ import { KeycloakModule } from './keycloak/keycloak.module';
 import { mainConfigSchema } from './main-config.schema';
 import { QueueModule } from './queue/queue.module';
 import { TransactionModule } from './transaction/transaction.module';
-require('./common/primitive.extends');
 
 @Module({
   imports: [
@@ -32,7 +31,10 @@ require('./common/primitive.extends');
         //dest: configService.get('MULTER_DEST') || './upload',
         storage: diskStorage({
           destination: configService.get('MULTER_DEST') || './upload',
-        })
+        }),
+        limits: {
+          fileSize: 10000000, // Sensitive: 10MB is more than the recommended limit of 8MB
+        }
       }),
       inject: [ConfigService],
     }),
