@@ -39,7 +39,7 @@ Ref: [Monorepo - CLI | NestJS - A progressive Node.js framework](https://docs.ne
 ```
 
 ## Application flow
-<img src="sa.png" alt="Application flow" />
+![Application flow](sa.png)
 
 ## Pre-requirement
 - Node.js v14 or later
@@ -72,16 +72,14 @@ $ npm run start
 $ npm run start queue
 ```
 
-### 
+## Keycloak setting
+Please view [this guide](apps/main/src/keycloak/README.md)
+### Using curl command
 - Get token:
-
 ```bash
 $ curl --location --request POST 'http://localhost:3000/auth/login' \
 --header 'Content-Type: application/json' \
---data-raw '{
-    "username": "user1",
-    "password": "123123"
-}'
+--data-raw '{"username": "user1","password": "123123"}'
 ```
 - Start import
 ```bash

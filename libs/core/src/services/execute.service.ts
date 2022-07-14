@@ -70,9 +70,10 @@ export class ExecuteService {
 
   async errorJob(executionId: string, jobId: string, error, options: any) {
     try {
+      let errorMessage = error.message;
       if (error instanceof QueryFailedError) {
         Logger.error(error);
-        error.message = 'Internal Server Error, please check logger for more information';
+        errorMessage = 'Internal Server Error, please check logger for more information';
       }
       const endDate = new Date();
       const job = await this.jobRepo.findOne({ where: { id: jobId } });
@@ -80,7 +81,7 @@ export class ExecuteService {
         status: JobStatus.Error,
         startDate: options.startedAt,
         endDate: endDate,
-        metadata: {...job.metadata, errorMessage: error.message},
+        metadata: {...job.metadata, errorMessage: errorMessage},
       });
       await this.jobRepo.update(jobId, updatedJob);
       const execution: Execution = await this.jobRepo.manager.findOne(Execution, { where: { id: executionId } });
