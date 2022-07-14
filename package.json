@@ -15,7 +15,7 @@
     "doc:libs": "compodoc -p libs/core/tsconfig.app.json -d docs/libs/core",
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"apps/**/*.ts\"",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "prestart": "rimraf dist/apps/main",
     "start": "nest start",
     "prestart:queue": "rimraf dist/apps/queue",
@@ -33,7 +33,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/problem-statement/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/main/test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/axios": "^0.1.0",
@@ -98,10 +98,11 @@
     "verbose": true,
     "collectCoverage": false,
     "collectCoverageFrom": [
-      "<rootDir>/apps/**/*.(t|j)s",
-      "<rootDir>/libs/**/*.(t|j)s",
-      "!<rootDir>/dist/**/*.(t|j)s",
-      "!<rootDir>/**/*.(spec|test|interface|module|mock).(ts|js)"
+      "<rootDir>/apps/**/*.(ts|js)",
+      "<rootDir>/libs/**/*.(ts|js)",
+      "!<rootDir>/dist/**/*.(ts|js)",
+      "!<rootDir>/**/*.(spec|e2e-spec|entity|interface|dto|module|mock).(ts|js)",
+      "!<rootDir>/**/index.(ts|js)"
     ],
     "coverageDirectory": "<rootDir>/coverage",
     "coveragePathIgnorePatterns": [
