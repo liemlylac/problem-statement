@@ -15,7 +15,7 @@ export class ImportService {
   ) {
   }
 
-  async import(data: JobImportOptions) {
+  async executeImport(data: JobImportOptions) {
     const queryRunner = this.transRepo.manager.connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -27,7 +27,7 @@ export class ImportService {
       await this.executionService.doneJob(queryRunner.manager, data.executionId, data.jobId);
       this.logger.log(`Imported ${data.executionId}.${data.jobId} (${data.items.length})`);
       await queryRunner.commitTransaction();
-      return 'Ok';
+      return;
     } catch (error) {
       this.logger.error(error);
       await queryRunner.rollbackTransaction();

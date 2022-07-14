@@ -13,13 +13,13 @@ export class ImportController {
   }
 
   @MessagePattern(commonConfig.MessagePattern.Transaction.Import)
-  async import(@Payload() data: JobImportOptions, @Ctx() context: RmqContext) {
+  async executeImport(@Payload() data: JobImportOptions, @Ctx() context: RmqContext) {
     this.logger.log(`Received message: ${JSON.stringify(commonConfig.MessagePattern.Transaction.Import)}`);
     const channel = context.getChannelRef();
     const originalMsg = context.getMessage();
     try {
-      await this.service.import(data);
-      return {};
+      await this.service.executeImport(data);
+      return;
     } catch (e) {
       this.logger.error(e);
     } finally {

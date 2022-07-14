@@ -15,4 +15,4 @@ export const coreConfigSchema = {
   DB_TIMEZONE:Joi.string().default('Z'),
   DB_LOGGING: Joi.boolean().default(false),
   DB_CHARSET: Joi.string().default('utf8'),
-}
+};

@@ -17,4 +17,5 @@ import { KeycloakService } from './keycloak.service';
   providers: [KeycloakConfigService, KeycloakService],
   exports: [KeycloakConnectModule, KeycloakService],
 })
-export class KeycloakModule {}
+export class KeycloakModule {
+}

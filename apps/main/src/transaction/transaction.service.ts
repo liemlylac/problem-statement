@@ -16,14 +16,10 @@ export class TransactionService implements ImportInterface {
   }
 
   async validateTransactionImportData(items, classType) {
-    const result = {
-      checkedItems: 0,
-      errors: [],
-      items: undefined,
-    }
+    const result = { checkedItems: 0, errors: [], items: undefined }
     const transformedItems = [];
-    for (let item of items) {
-      item = plainToInstance(classType, item);
+    for (const i of items) {
+      const item = plainToInstance(classType, i);
       await validate(item, {
         forbidNonWhitelisted: true,
         skipNullProperties: false,
@@ -32,12 +28,9 @@ export class TransactionService implements ImportInterface {
       }).then((validationErrors: ValidationError[]) => {
         result.checkedItems += 1;
         if (validationErrors.length > 0) {
-          result.errors.push({
-            itemNo: result.checkedItems,
-            error: validationErrors.map(e =>
+          result.errors.push({ itemNo: result.checkedItems, error: validationErrors.map(e =>
               e.toString(false, true).trim()
-            ),
-          });
+            )});
         } else {
           transformedItems.push(item);
         }

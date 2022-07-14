@@ -19,7 +19,7 @@ export class ExecuteService {
     const execution = this.executeRepo.create({
       metadata: metadata,
     });
-    return await execution.save({ reload: true });
+    return execution.save({ reload: true });
   }
 
   getById(executionId, options: { loadJobs: boolean}) {
@@ -60,21 +60,12 @@ export class ExecuteService {
   }
 
   protected async countNoFinishedJob(manager: EntityManager, executionId: string): Promise<number> {
-    return await manager.count(Job, {
+    return manager.count(Job, {
       where: {
         executionId: executionId,
         status: Not(In([JobStatus.Pending, JobStatus.Processing])),
       },
     });
-  }
-
-  protected async foundLatestJobEndDate(manager: EntityManager, executionId: string) {
-    const { endDate } = await manager.createQueryBuilder(Job, 'job')
-      .select('job.endDate')
-      .where('job.executionId = :executionId', { executionId })
-      .orderBy('job.endDate', 'DESC')
-      .getOne();
-    return endDate;
   }
 
   async errorJob(executionId: string, jobId: string, error, options: any) {
