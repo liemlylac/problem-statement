@@ -1,3 +1,4 @@
+<!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
   <h1>Problem statement</h1>
 </div>
@@ -37,55 +38,69 @@ Ref: [Monorepo - CLI | NestJS - A progressive Node.js framework](https://docs.ne
   tsconfig.json
 ```
 
+## Application flow
+<img src="sa.png" alt="Application flow" />
+
 ## Pre-requirement
 - Node.js v14 or later
 - Docker
 - Docker Compose
 
-## Installation
+## Starting
+- Installation
 ```bash
+# problem-statement >
 $ npm install
 ```
+- Copy `.env.example` to `.env`
 
-## Running services needed for apps
+- Running services needed for apps
 ```bash
-docker-compose up
+# problem-statement >
+$ docker-compose up
 ```
 
-## Running the main app
+- Running the main app (another terminal)
 ```bash
-# development
+# problem-statement >
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Running the queue app
+- Running the queue app (another terminal)
 ```bash
-# development
+# problem-statement >
 $ npm run start queue
-
-# watch mode
-$ npm run start:dev queue
-
-# production mode
-$ npm run start:prod queue
 ```
+
+### 
+- Get token:
+
+```bash
+$ curl --location --request POST 'http://localhost:3000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user1",
+    "password": "123123"
+}'
+```
+- Start import
+```bash
+$ curl --location --request POST 'localhost:3000/transaction/import' \
+--header 'Authorization: Bearer <xxx.xxx.xxx>' \
+--form 'file=@"/path/to/sample-transaction-import-file.xlsx"'
+```
+
+- Describe execution
+```bash
+$ curl --location --request GET 'http://localhost:3000/execution/describe/<execution-id-here>' \
+--header 'Authorization: Bearer <xxx.xxx.xxx>'
+```
+
 
 ## Test
 ```bash
-# unit tests
+# problem-statement >
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## License
