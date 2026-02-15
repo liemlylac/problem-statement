@@ -36,12 +36,12 @@
     "test:e2e": "jest --config ./apps/main/test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/axios": "^0.1.0",
+    "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.2.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.2.0",
     "@nestjs/microservices": "^9.2.0",
-    "@nestjs/platform-express": "^9.2.0",
+    "@nestjs/platform-express": "^10.4.22",
     "@nestjs/swagger": "^6.1.0",
     "@nestjs/typeorm": "^9.0.0",
     "amqp-connection-manager": "^4.1.9",
@@ -49,7 +49,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "joi": "^17.7.0",
-    "keycloak-connect": "^18.0.2",
+    "keycloak-connect": "^24.0.5",
     "mysql2": "^2.3.3",
     "nest-keycloak-connect": "^1.8.3",
     "reflect-metadata": "^0.1.13",
